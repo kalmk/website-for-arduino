@@ -1,13 +1,31 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Arduino </title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html>
+   <head>
+
+      <title>Communicating from Node.js to an Arduino</title>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
+   </head>
+   <body>
+
+      <h1>Communicating from Node.js to an Arduino</h1>
+
+      <button id="lightOn">Turn Light On</button>
+      <button id="lightOff">Turn Light Off</button>
+
+      <script>
+
+      var socket = io();
+
+      document.getElementById('lightOn').onclick = function() {
+        socket.emit('lights', { "status":"1" });
+      };
+
+      document.getElementById('lightOff').onclick = function(){               
+        socket.emit('lights', { "status":"0" });
+      };
+
+      </script>
+
+   </body>
 </html>
