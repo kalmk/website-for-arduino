@@ -1,0 +1,48 @@
+* implemented blink button
+
+// Define the port for the LED
+int lightPin = 2;
+
+void setup() 
+{ 
+  // Initialize the light pin
+  pinMode(lightPin, OUTPUT);
+
+  // Initialize the Serial
+  Serial.begin(9600);
+}
+
+void loop() {
+
+  // Check to see if Serial data is being received
+  if (Serial.available() > 0) {
+    
+    // Create a new string variable to receive Serial data
+    String receivedString = "";
+    
+    // Loop through received data and append to the receivedString variable
+    while (Serial.available() > 0) {
+      receivedString += char(Serial.read());
+    }
+    
+    // Print received Serial data
+    Serial.println(receivedString);
+    
+    // Change LED status based on received data
+    if (receivedString == "1") {
+      digitalWrite(lightPin, HIGH); // Turn on the LED
+    } 
+    else if (receivedString == "0") {
+      digitalWrite(lightPin, LOW); // Turn off the LED
+    } 
+    else if (receivedString == "3") {
+      // Blink the LED when receivedString is "3"
+      for (int i = 0; i < 5; i++) { // Blink 5 times
+        digitalWrite(lightPin, HIGH); // Turn on the LED
+        delay(500); // Wait for 500ms
+        digitalWrite(lightPin, LOW); // Turn off the LED
+        delay(500); // Wait for 500ms
+      }
+    }
+  }
+}
