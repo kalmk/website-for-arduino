@@ -13,6 +13,7 @@
       <button id="lightOn">Turn Light On</button>
       <button id="lightOff">Turn Light Off</button>
       <button id="lightBlink">Light Blink</button>
+      <button id="pattern">Light Pattern </button>
 
       <script>
 
@@ -28,6 +29,10 @@
 
       document.getElementById('lightBlink').onclick = function(){               
         socket.emit('lights', { "status":"3" });
+      };
+
+      document.getElementById('pattern').onclick = function(){               
+        socket.emit('lights', { "status":"4" });
       };
 
       </script>
